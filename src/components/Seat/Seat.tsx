@@ -24,7 +24,8 @@ const Seats = () => {
     // tier breaks
     if (box.label === "-") return "border-t-1 text-amber-950 text-xs ";
     // row labels
-    if (box.label === box.rowLabel) return "border-0  text-amber-950";
+    if (box.label === box.rowLabel)
+      return "border-0  text-amber-950 text-sm font-bold";
     // seats -- check for selected or booked
     if (checkSeatForSelected(box))
       return "border-1 rounded bg-emerald-600 text-white";
