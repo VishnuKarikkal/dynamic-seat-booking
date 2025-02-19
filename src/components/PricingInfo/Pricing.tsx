@@ -1,4 +1,4 @@
-import DetailedPricing from "../BookingInfo/DetailedPricing";
+import DetailedPricing from "../DetailedPricing/DetailedPricing";
 
 interface PricingProps {
   onAction: (flag: boolean) => void;
@@ -6,7 +6,7 @@ interface PricingProps {
 
 const Pricing = (props: PricingProps) => {
   return (
-    <div className="border-1 my-3 rounded flex items-center justify-center">
+    <div className=" my-3 rounded flex items-center justify-center">
       <DetailedPricing pricing={true} />
       <button
         onClick={() => props.onAction(true)}

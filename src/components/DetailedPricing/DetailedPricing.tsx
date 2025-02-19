@@ -17,7 +17,7 @@ const DetailedPricing = (props: DetailedPricingProps) => {
     let pricePerTier: string[] = ["", "", ""];
 
     selectedSeats?.forEach((seat) => {
-      let label = `${seat.label}${seat.rowLabel}`;
+      let label = `${seat.rowLabel}${seat.label}`;
       if (seat.tierId == 0) bookedRows[0].push(label);
       else if (seat.tierId == 1) bookedRows[1].push(label);
       else bookedRows[2].push(label);
@@ -41,36 +41,63 @@ const DetailedPricing = (props: DetailedPricingProps) => {
     };
   };
 
+  const getSeatsChosen = () => {
+    if (props.pricing) {
+      return null;
+    }
+
+    return (
+      <>
+        <div className="mt-2 text-sm font-bold text-blue-600">
+          <div className="text-emerald-800 inline">Silver : </div>
+          {getTicketDetails().pricePerTier1}
+        </div>
+        <div className="mt-2 text-sm font-bold text-blue-600 ">
+          <div className="text-emerald-800 inline">Gold : </div>
+          {getTicketDetails().pricePerTier2}
+        </div>
+        <div className="mt-2 text-sm font-bold text-blue-600">
+          <div className="text-emerald-800 inline">Platinum : </div>
+          {getTicketDetails().pricePerTier3}
+        </div>
+      </>
+    );
+  };
+
+  const getTotalPrice = () => {
+    if (props.pricing) {
+      return (
+        <>
+          Total:
+          <div className="mx-5 text-sky-500">{getTicketDetails().Total}</div>
+        </>
+      );
+    }
+
+    return (
+      <>
+        Total:
+        <div className=" text-sky-500">{getTicketDetails().Total}</div>
+      </>
+    );
+  };
+
   return (
     <>
       <div
-        className={`mt-1 font-bold  ${
-          props.pricing ? "text-red-400" : "text-gray-700"
-        }`}
+        className={`mt-1 font-bold  ${props.pricing ? "text-gray-700" : ""}`}
       >
         {props.pricing ? "Seats Chosen :   " : ""}
-        {getTicketDetails().bookedRows}
+        <div className={"text-red-400"}>{getTicketDetails().bookedRows}</div>
       </div>
 
-      {props.pricing ? null : (
-        <>
-          <div className="mt-2 text-sm text-blue-600">
-            {getTicketDetails().pricePerTier1}
-          </div>
-          <div className="mt-2 text-sm text-blue-600">
-            {getTicketDetails().pricePerTier2}
-          </div>
-          <div className="mt-2 text-sm text-blue-600">
-            {getTicketDetails().pricePerTier3}
-          </div>
-        </>
-      )}
+      {getSeatsChosen()}
       <div
         className={`mt-2 text-lg font-bold text-amber-950 ${
           props.pricing ? "mx-3" : ""
         }`}
       >
-        Total: {getTicketDetails().Total}
+        {getTotalPrice()}
       </div>
     </>
   );
