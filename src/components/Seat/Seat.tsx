@@ -43,6 +43,8 @@ const Seats = () => {
   };
 
   const onSelection = (seat: Seat) => {
+    // label rows should not allow click
+    if (seat.label === seat.rowLabel) return;
     if (checkSeatForSelected(seat)) {
       // removes already selected
       let updateSelectedSeats = selectedSeats?.filter(
