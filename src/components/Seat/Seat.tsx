@@ -1,12 +1,19 @@
 import { seat } from "../SeatLayout/seats";
 import { useAppStore } from "../../store/store";
 import { Seat } from "./Types";
+import { useEffect, useState } from "react";
 
 const Seats = () => {
+  const [dynamicSeats, setDynamicSeats] = useState<Seat[]>([]);
+
   const selectedSeats = useAppStore((state) => state.selectedSeats);
   const bookedSeats = useAppStore((state) => state.bookedSeats);
 
   const setSelectedSeats = useAppStore((state) => state.setSelectedSeats);
+
+  useEffect(() => {
+    getDynamicSeats();
+  }, []);
 
   const getCursor = (box: Seat) => {
     if (box.label === "-" || box.label === box.rowLabel) return "none";
@@ -54,8 +61,113 @@ const Seats = () => {
     }
   };
 
+  const getLabel = (row: number, column: number, isBreak: boolean) => {
+    // column = 0 : "A"( if row = 0) , 1 : "1", 2 : "2", 3 : "3" ...
+    // isBreak ==> "-"
+
+    if (isBreak) return "-";
+
+    switch (row) {
+      case 0:
+        if (column == 0) return "A";
+        break;
+      case 1:
+        if (column == 0) return "B";
+        break;
+      case 2:
+        if (column == 0) return "C";
+        break;
+      case 3:
+        if (column == 0) return "D";
+        break;
+      case 4:
+        if (column == 0) return "E";
+        break;
+      case 5:
+        if (column == 0) return "F";
+        break;
+      case 6:
+        if (column == 0) return "G";
+        break;
+      case 7:
+        if (column == 0) return "H";
+        break;
+      case 8:
+        if (column == 0) return "I";
+        break;
+      case 9:
+        if (column == 0) return "J";
+        break;
+      case 10:
+        if (column == 0) return "K";
+        break;
+      case 11:
+        if (column == 0) return "L";
+        break;
+      case 12:
+        if (column == 0) return "M";
+        break;
+      case 13:
+        if (column == 0) return "N";
+        break;
+      case 14:
+        if (column == 0) return "O";
+        break;
+      case 15:
+        if (column == 0) return "P";
+        break;
+      default:
+        if (column == 0) return "Q";
+    }
+
+    return `${column}`;
+  };
+
+  const getDynamicSeats = () => {
+    let dynamicRows = [];
+
+    let rows = 13,
+      columns = 26;
+    let id = 0;
+    let breaks = [4, 8, 13]; // row breaks
+    let tierId = 0;
+    let rowLabel = "A";
+
+    for (let i = 0; i < rows; i++) {
+      // rows
+      for (let j = 0; j < columns; j++) {
+        // cols
+
+        let tier = tierId; // for keeping track of tierIds
+        let row = rowLabel; // for keeping track of Row Labels
+        let label = getLabel(i, j, breaks.includes(i + 1)); // gets labels associated with each seat
+
+        if (isNaN(Number(label))) {
+          row = rowLabel = label;
+        }
+
+        if (breaks.includes(i + 1) && j == 0) {
+          tier = tierId;
+          tierId += 1;
+        }
+
+        dynamicRows.push({
+          seatId: id,
+          label: label,
+          rowLabel: row,
+          visible: true,
+          tierId: tier,
+        });
+
+        id++;
+      }
+    }
+
+    setDynamicSeats(dynamicRows);
+  };
+
   const getSeats = () =>
-    [...seat].reverse().map((item) => (
+    [...dynamicSeats].reverse().map((item) => (
       <div
         key={item.seatId}
         style={{

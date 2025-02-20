@@ -1,5 +1,34 @@
 import { Seat, Tier } from "../Seat/Types";
 
+export const breakRows = [
+  { seatId: -49, label: "-", rowLabel: "C", visible: true, tierId: -1 },
+  { seatId: -48, label: "-", rowLabel: "C", visible: true, tierId: -1 },
+  { seatId: -47, label: "-", rowLabel: "C", visible: true, tierId: -1 },
+  { seatId: -46, label: "-", rowLabel: "C", visible: true, tierId: -1 },
+  { seatId: -45, label: "-", rowLabel: "C", visible: true, tierId: -1 },
+  { seatId: -44, label: "-", rowLabel: "C", visible: true, tierId: -1 },
+  { seatId: -43, label: "-", rowLabel: "C", visible: true, tierId: -1 },
+  { seatId: -42, label: "-", rowLabel: "C", visible: true, tierId: -1 },
+  { seatId: -41, label: "-", rowLabel: "C", visible: true, tierId: -1 },
+  { seatId: -40, label: "-", rowLabel: "C", visible: true, tierId: -1 },
+  { seatId: -39, label: "-", rowLabel: "C", visible: true, tierId: -1 },
+  { seatId: -38, label: "-", rowLabel: "C", visible: true, tierId: -1 },
+  { seatId: -37, label: "-", rowLabel: "C", visible: true, tierId: -1 },
+  { seatId: -36, label: "-", rowLabel: "C", visible: true, tierId: -1 },
+  { seatId: -35, label: "-", rowLabel: "C", visible: true, tierId: -1 },
+  { seatId: -34, label: "-", rowLabel: "C", visible: true, tierId: -1 },
+  { seatId: -33, label: "-", rowLabel: "C", visible: true, tierId: -1 },
+  { seatId: -32, label: "-", rowLabel: "C", visible: true, tierId: -1 },
+  { seatId: -31, label: "-", rowLabel: "C", visible: true, tierId: -1 },
+  { seatId: -30, label: "-", rowLabel: "C", visible: true, tierId: -1 },
+  { seatId: -29, label: "-", rowLabel: "C", visible: true, tierId: -1 },
+  { seatId: -28, label: "-", rowLabel: "C", visible: true, tierId: -1 },
+  { seatId: -27, label: "-", rowLabel: "C", visible: true, tierId: -1 },
+  { seatId: -26, label: "-", rowLabel: "C", visible: true, tierId: -1 },
+  { seatId: -25, label: "-", rowLabel: "C", visible: true, tierId: -1 },
+  { seatId: -50, label: "-", rowLabel: "C", visible: true, tierId: -1 },
+];
+
 export const seat: Seat[] = [
   // 1
 
