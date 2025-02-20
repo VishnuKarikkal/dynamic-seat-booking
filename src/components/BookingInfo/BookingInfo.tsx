@@ -19,12 +19,12 @@ const BookingInfo = (props: BookingInfoProps) => {
     setIsBooking(true);
     // updating store to mark selected seats as booked
     setBookedSeats([...bookedSeats, ...selectedSeats]);
-    // clearing selected seats store
-    setSelectedSeats([]);
 
     setTimeout(() => {
       setIsBooking(false);
       alert("Booked.... Seats confirmed!");
+      // clearing selected seats store
+      setSelectedSeats([]);
       props.onBack(false);
     }, 4000);
   };

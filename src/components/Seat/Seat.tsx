@@ -1,4 +1,3 @@
-import { seat } from "../SeatLayout/seats";
 import { useAppStore } from "../../store/store";
 import { Seat } from "./Types";
 import { useEffect, useState } from "react";
@@ -126,10 +125,10 @@ const Seats = () => {
   const getDynamicSeats = () => {
     let dynamicRows = [];
 
-    let rows = 13,
-      columns = 26;
-    let id = 0;
-    let breaks = [4, 8, 13]; // row breaks
+    let rows = 13; // number of rows
+    let columns = 26; // number of columns
+    let id = 0; // for Seat ID
+    let breaks = [4, 8, 13]; // row breaks: [4,8,13] ===> break between 3rd and 5th rows(4th), 7th and 9th rows(8th), after 12th row(13th)
     let tierId = 0;
     let rowLabel = "A";
 
@@ -137,7 +136,6 @@ const Seats = () => {
       // rows
       for (let j = 0; j < columns; j++) {
         // cols
-
         let tier = tierId; // for keeping track of tierIds
         let row = rowLabel; // for keeping track of Row Labels
         let label = getLabel(i, j, breaks.includes(i + 1)); // gets labels associated with each seat
