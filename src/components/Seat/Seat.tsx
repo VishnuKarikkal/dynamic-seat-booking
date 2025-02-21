@@ -131,6 +131,10 @@ const Seats = () => {
     let columns = 26; // number of columns
     let id = 0; // for Seat ID
     let breaks = [4, 8, 13]; // row breaks: [4,8,13] ===> break between 3rd and 5th rows(4th), 7th and 9th rows(8th), after 12th row(13th)
+    let invisibleSeats = [
+      2, 3, 25, 26, 29, 28, 54, 51, 52, 55, 77, 78, 132, 133, 134, 154, 155,
+      156, 158, 159, 181, 182, 210, 211, 233, 234, 236, 260,
+    ]; // seats to be set invisible (according to the theater layout😉) - seat number(from 1st row) array
     let tierId = 0;
     let rowLabel = "A";
 
@@ -138,6 +142,7 @@ const Seats = () => {
       // rows
       for (let j = 0; j < columns; j++) {
         // cols
+        let visibility = true; //toggle seat visibility
         let tier = tierId; // for keeping track of tierIds
         let row = rowLabel; // for keeping track of Row Labels
         let label = getLabel(i, j, breaks.includes(i + 1)); // gets labels associated with each seat
@@ -151,11 +156,13 @@ const Seats = () => {
           tierId += 1;
         }
 
+        visibility = !invisibleSeats.includes(id + 1);
+
         dynamicRows.push({
           seatId: id,
           label: label,
           rowLabel: row,
-          visible: true,
+          visible: visibility,
           tierId: tier,
         });
 
@@ -176,6 +183,11 @@ const Seats = () => {
         }}
         className={`seat  flex justify-center ${getBoxLabelClasses(item)} `}
         onClick={() => (checkSeatForBooked(item) ? "" : onSelection(item))}
+        title={
+          !isNaN(Number(item.label))
+            ? `${item.rowLabel}${item.label}`
+            : undefined
+        }
       >
         {item.label != "-" ? item.label : ""}
       </div>
